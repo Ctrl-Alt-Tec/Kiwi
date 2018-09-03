@@ -82,7 +82,7 @@
        document.getElementById("file-upload").addEventListener("change", function(e){
         var file = e.target.files[0];
         firebase.storage().ref(fileUID).put(file);
-        document.querySelector('#upload-main').innerText = "<h1>"+fileUI+"<h1><span>Tu archivo se ha subido exitosamente</span><input type='button' value='OK!'/>"
+        document.querySelector('#upload-main').innerText = "<h1>"+fileUID+"<h1><span>Tu archivo se ha subido exitosamente</span><input type='button' value='OK!'/>"
          //alert(fileUID);
       })
     </script>
