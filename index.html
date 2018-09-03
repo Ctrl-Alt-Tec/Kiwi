@@ -74,9 +74,7 @@
       <a href="http://ctrl-alt-tec.github.io/Website"><img src='https://ctrl-alt-tec.github.io/Website/img/LOGO-INLINE.png' height="48px"/></a>
       <h1>/PROJECT KIWI</h1>
     </div>
-    <div class='section-fullscreen'>
-      <h1 class='file-id'>
-      </h1>
+    <div class='section-fullscreen' id='upload-main'>
       <h1>UPLOAD FILES</h1>
       <input type='file' id="file-upload"/>
     </div>
@@ -84,7 +82,7 @@
        document.getElementById("file-upload").addEventListener("change", function(e){
         var file = e.target.files[0];
         firebase.storage().ref(fileUID).put(file);
-        document.querySelector('.file-id').innerText = fileUID
+        document.querySelector('#upload-main').innerText = "<h1>"+fileUI+"<h1><span>Tu archivo se ha subido exitosamente</span><input type='button' value='OK!'/>"
          //alert(fileUID);
       })
     </script>
