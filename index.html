@@ -76,9 +76,6 @@
     </div>
     <div class='section-fullscreen'>
       <h1 class='file-id'>
-        <script>
-          document.write(fileUID);
-        </script>
       </h1>
       <h1>UPLOAD FILES</h1>
       <input type='file' id="file-upload"/>
@@ -86,7 +83,9 @@
     <script>
        document.getElementById("file-upload").addEventListener("change", function(e){
         var file = e.target.files[0];
-        alert(fileUID);
+        firebase.firestore().ref(fileUID).put(file);
+        document.querySelector('.file-id').innerText = fileUID
+         //alert(fileUID);
       })
     </script>
   </body>
