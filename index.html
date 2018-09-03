@@ -25,12 +25,6 @@
       }
       
       var fileUID = generateUID();
-      
-      document.getElementById("file-upload").addEventListener("change", function(e){
-        var file = e.target.files[0];
-        alert(fileUID);
-      })
-      
     </script>
     <style>
       body{
@@ -89,5 +83,11 @@
       <h1>UPLOAD FILES</h1>
       <input type='file' id="file-upload"/>
     </div>
+    <script>
+       document.getElementById("file-upload").addEventListener("change", function(e){
+        var file = e.target.files[0];
+        alert(fileUID);
+      })
+    </script?
   </body>
 </html>
