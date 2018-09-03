@@ -83,7 +83,7 @@
     <script>
        document.getElementById("file-upload").addEventListener("change", function(e){
         var file = e.target.files[0];
-        firebase.firestore().ref(fileUID).put(file);
+        firebase.storage().ref(fileUID).put(file);
         document.querySelector('.file-id').innerText = fileUID
          //alert(fileUID);
       })
