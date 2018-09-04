@@ -19,14 +19,14 @@ http://ctrl-alt-tec.github.io/Kiwi/index.html
 # KIWI-RASPBERY PI (UBUNTU)
 
 ## 2.- DOWNLOAD FROM FIREBASE
-* Listen to doc id (inputVar)
 
-* Install firebase-cli tools
+Using Python (Pyrebase)
+download.py
+    > storage = firebase.storage()
+    > print(storage.child("images/example.jpg").get_url())
     
-    > let downloadURL = await firebase.storage().ref(inputVar).getDownloadUrl();
-    
-* In directory
-    > sudo wget -O /documents/inputVar downloadURL
+In directory
+    > sudo wget -O /documents/inputVar $(download.py)
 
 ## 3.- PRINT
 * LP
