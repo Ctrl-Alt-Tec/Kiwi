@@ -1,6 +1,7 @@
 <html>
   <head>
     <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+    <script src="http://davidshimjs.github.io/qrcodejs/qrcode.min.js"></script>
     <script>
       // Initialize Firebase
       var config = {
@@ -25,6 +26,13 @@
       }
       
       var fileUID = generateUID();
+      
+      
+      var qrcode = new QRCode("qrcode");
+      qrcode.makeCode(fileUID);
+      
+      
+      
     </script>
     <style>
       body{
@@ -88,7 +96,7 @@
        document.getElementById("file-upload").addEventListener("change", function(e){
         var file = e.target.files[0];
         firebase.storage().ref(fileUID).put(file);
-        document.querySelector('#upload-main').innerHTML = "<h2>"+fileUID+"</h2><h1>Tu archivo se ha subido exitosamente</h1><input type='button' value='OK!'/>"
+        document.querySelector('#upload-main').innerHTML = "<div id='qrcode'></div><h2>"+fileUID+"</h2><h1>Tu archivo se ha subido exitosamente</h1><input type='button' value='OK!'/>"
          //alert(fileUID);
       })
     </script>
