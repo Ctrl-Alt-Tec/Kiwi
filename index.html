@@ -45,6 +45,12 @@
         font-weight: 800;
         font-size: 24px;
       }
+      h2{ 
+        font-family:  Arial;
+        font-weight: 900;
+        font-size: 64;
+        color: rgba(160,160,160);
+      }
       .header{
         display: flex;
         flex-direction: row;
@@ -75,14 +81,14 @@
       <h1>/PROJECT KIWI</h1>
     </div>
     <div class='section-fullscreen' id='upload-main'>
-      <h1>UPLOAD FILES</h1>
+      <h2>UPLOAD FILES</h2>
       <input type='file' id="file-upload"/>
     </div>
     <script>
        document.getElementById("file-upload").addEventListener("change", function(e){
         var file = e.target.files[0];
         firebase.storage().ref(fileUID).put(file);
-        document.querySelector('#upload-main').innerHTML = "<h1>"+fileUID+"</h1><span>Tu archivo se ha subido exitosamente</span><input type='button' value='OK!'/>"
+        document.querySelector('#upload-main').innerHTML = "<h2>"+fileUID+"</h2><h1>Tu archivo se ha subido exitosamente</h1><input type='button' value='OK!'/>"
          //alert(fileUID);
       })
     </script>
