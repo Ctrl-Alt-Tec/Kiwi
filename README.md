@@ -23,11 +23,12 @@ http://ctrl-alt-tec.github.io/Kiwi/index.html
 Using Python (Pyrebase)
 download.py
 
-    > storage = firebase.storage()
-    > print(storage.child("images/example.jpg").get_url())
+    storage = firebase.storage()
+    print(storage.child("images/example.jpg").get_url())
     
 In directory
-    > sudo wget -O /documents/inputVar $(download.py)
+    
+    sudo wget -O /documents/inputVar $(download.py)
 
 ## 3.- PRINT
 * LP
