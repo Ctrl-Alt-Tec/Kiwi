@@ -19,15 +19,16 @@ http://ctrl-alt-tec.github.io/Kiwi/index.html
 * Listen to doc id (inputVar)
 
 * Install firebase-cli tools
-    let downloadURL = await firebase.storage().ref(inputVar).getDownloadUrl();
+    
+    > let downloadURL = await firebase.storage().ref(inputVar).getDownloadUrl();
     
 * In directory
-    >> sudo wget -O /documents/inputVar downloadURL
+    > sudo wget -O /documents/inputVar downloadURL
 
 ## 3.- PRINT
 * LP
-    >> sudo lp /documents/inputVar
+    > sudo lp /documents/inputVar
 
 ## 4.- REMOVE FILE
 * REMOVE
-    >> suro rm -rf /documents/inputVar
+    > suro rm -rf /documents/inputVar
