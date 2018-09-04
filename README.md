@@ -13,6 +13,9 @@ http://ctrl-alt-tec.github.io/Kiwi/index.html
 
 * Name file in firebase after string
 
+* Generate qr code
+     https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Hola1
+
 # KIWI-RASPBERY PI (UBUNTU)
 
 ## 2.- DOWNLOAD FROM FIREBASE
