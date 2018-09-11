@@ -17,7 +17,7 @@ def main():
   docURL = firebase.storage().child(docID).get_url(1)
   
   ## # WARNING! USING SUDO WITH SHELL=TRUE
-  subprocess.call("sudo wget -O "+docID+" "+docURL, shell=True)
+  subprocess.call(["sudo wget", "-O", docID, docURL], shell=True)
   
   ## GET PRICE AND CHECK IF PAYED
   
@@ -25,5 +25,5 @@ def main():
   subprocess.call(["lp", docID])
   
 true=1
-while(true==1):
+while true==1:
   main
