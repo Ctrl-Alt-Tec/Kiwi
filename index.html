@@ -29,7 +29,16 @@
       var ui = new firebaseui.auth.AuthUI(firebase.auth());
       ui.start('#firebaseui-auth-container', {
         callbacks: {signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-       
+          document.querySelector("#upload-main").innerHTML = 
+            "<h2>Hola</h2>"+
+            "<a href='' onClick='firebase.auth().signOut()' class='sign-out'>CERRAR SESIÓN</a>"+
+            "<input type='file' id='file-upload'/>"
+          
+          document.getElementById("file-upload").addEventListener("change", function(e){
+            var file = e.target.files[0];
+            firebase.storage().ref(fileUID).put(file);
+            document.querySelector('#upload-main').innerHTML = "<image id='qrcode' src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+fileUID+"'><h2>"+fileUID+"</h2><h1>Tu archivo se ha subido exitosamente</h1><input type='button' value='OK!'/>"
+          })
       }},
         signInOptions: [
           firebase.auth.EmailAuthProvider.PROVIDER_ID
@@ -97,23 +106,12 @@
   <body>
     <div class='header'>
       <a href="http://ctrl-alt-tec.github.io/Website"><img src='https://ctrl-alt-tec.github.io/Website/img/LOGO-INLINE.png' height="48px"/></a>
-      <h1>/KIWI (beta)</h1>
+      <h1>/KIWI print</h1>
     </div>
     <div class='section-fullscreen' id='upload-main'>
-      <h2>Hola</h2
-      <a href='' onClick='firebase.auth().signOut()' class='sign-out'>CERRAR SESIÓN</a>
-      <input type='file' id='file-upload'/>
+      
     </div>
     <div id="firebaseui-auth-container"></div>
-    <script>
-       document.getElementById("file-upload").addEventListener("change", function(e){
-        var file = e.target.files[0];
-        firebase.storage().ref(fileUID).put(file);
-        
-        document.querySelector('#upload-main').innerHTML = "<image id='qrcode' src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+fileUID+"'><h2>"+fileUID+"</h2><h1>Tu archivo se ha subido exitosamente</h1><input type='button' value='OK!'/>"
-         //alert(fileUID);
-      })
-     
-    </script>
+    
   </body>
 </html>
