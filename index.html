@@ -27,7 +27,10 @@
       
       
       var ui = new firebaseui.auth.AuthUI(firebase.auth());
-      ui.start('#firebaseui-auth-container', {
+      ui.start('.section-fullscreen', {
+        callbacks: signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+        document.querySelector(".section-fullscreen").innerHTML = "<h2>UPLOAD FILES</h2><input type='file' id='file-upload'/>"
+      },
         signInOptions: [
           firebase.auth.EmailAuthProvider.PROVIDER_ID
         ],
@@ -95,8 +98,7 @@
       <h1>/PROJECT KIWI</h1>
     </div>
     <div class='section-fullscreen' id='upload-main'>
-      <h2>UPLOAD FILES</h2>
-      <input type='file' id="file-upload"/>
+      
     </div>
     <div id="firebaseui-auth-container"></div>
     <script>
