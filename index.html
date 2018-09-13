@@ -31,7 +31,7 @@
         callbacks: {signInSuccessWithAuthResult: function(authResult, redirectUrl) {
         document.querySelector(".section-fullscreen").innerHTML = 
           "<h2>Hola, "+firebase.auth().currentUser.displayName+"</h2>"+
-          "<a href='' onClick='firebase.auth().signOut()'>CERRAR SESIÓN</a>"+
+          "<a href='' onClick='firebase.auth().signOut()' class='sign-out'>CERRAR SESIÓN</a>"+
           "<input type='file' id='file-upload'/>"
       }},
         signInOptions: [
@@ -90,6 +90,9 @@
       }
       .header * :hover{
         background-color: rgba(160,160,160,0.5)
+      }
+      .sign-out{
+        padding: 24px
       }
     </style>
   </head>
