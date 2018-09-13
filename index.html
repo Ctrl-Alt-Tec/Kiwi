@@ -30,7 +30,7 @@
       ui.start('#firebaseui-auth-container', {
         callbacks: {signInSuccessWithAuthResult: function(authResult, redirectUrl) {
         document.querySelector(".section-fullscreen").innerHTML = 
-          "<h3>Hola, "+firebase.auth().currentUser.name+"</h3>"+
+          "<h3>Hola, "+firebase.auth().currentUser.displayName+"</h3>"+
           "<a href='' onClick='firebase.auth().signOut()'>CERRAR SESIÓN</a>"+
           "<h2>UPLOAD FILES</h2>"+
           "<input type='file' id='file-upload'/>"
