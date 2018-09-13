@@ -29,9 +29,8 @@
       var ui = new firebaseui.auth.AuthUI(firebase.auth());
       ui.start('#firebaseui-auth-container', {
         callbacks: {signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+          document.querySelector(".login-username").innerText = firebase.auth().currentUser.displayName;
           document.querySelector("#upload-main").innerHTML = 
-            "<h2>Hola</h2>"+
-            "<a href='' onClick='firebase.auth().signOut()' class='sign-out'>CERRAR SESIÓN</a>"+
             "<input type='file' id='file-upload'/>"
           
           document.getElementById("file-upload").addEventListener("change", function(e){
@@ -105,8 +104,11 @@
   </head>
   <body>
     <div class='header'>
-      <a href="http://ctrl-alt-tec.github.io/Website"><img src='https://ctrl-alt-tec.github.io/Website/img/LOGO-INLINE.png' height="48px"/></a>
-      <h1>/KIWI print</h1>
+      <div>
+        <a href="http://ctrl-alt-tec.github.io/Website"><img src='https://ctrl-alt-tec.github.io/Website/img/LOGO-INLINE.png' height="48px"/></a>
+        <h1>/KIWI print</h1>
+      </div>
+      <a href='' onClick="firebase.auth().signOut()" class='login-username'>INICIAR SESIÓN</a>
     </div>
     <div class='section-fullscreen' id='upload-main'>
       
