@@ -14,15 +14,17 @@ def main():
   
   ## GET DOC ID
   docID = raw_input("Ingresa el código: ")
-  docURL = firebase.storage().child(docID).get_url(1)
   
-  ## # WARNING! USING SUDO WITH SHELL=TRUE
-  subprocess.call(["sudo wget", "-O", docID, docURL], shell=True)
+  ## DOWNLOAD
+  docURL = firebase.storage().child(docID).download(docID)
   
   ## GET PRICE AND CHECK IF PAYED
   
   ## PRINT
   subprocess.call(["lp", docID])
+  
+  ## REMOVE FILE
+  subprocess.call(["sudo rm", "-rf", docID])
   
 true=1
 while true==1:
