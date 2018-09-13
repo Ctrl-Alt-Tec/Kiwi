@@ -16,13 +16,7 @@
     <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
     <script>
-      
-      ui.start('#firebaseui-auth-container', {
-        signInOptions: [
-          firebase.auth.EmailAuthProvider.PROVIDER_ID
-        ],
-        // Other config options...
-      });
+     
       
       
       function generateUID() {
@@ -108,6 +102,14 @@
         document.querySelector('#upload-main').innerHTML = "<image id='qrcode' src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+fileUID+"'><h2>"+fileUID+"</h2><h1>Tu archivo se ha subido exitosamente</h1><input type='button' value='OK!'/>"
          //alert(fileUID);
       })
+      
+      ui.start('#firebaseui-auth-container', {
+        signInOptions: [
+          firebase.auth.EmailAuthProvider.PROVIDER_ID
+        ],
+        // Other config options...
+      });
+      
     </script>
   </body>
 </html>
