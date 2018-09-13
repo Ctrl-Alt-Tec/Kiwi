@@ -12,13 +12,7 @@
         messagingSenderId: "296898111291"
       };
       firebase.initializeApp(config);
-    </script>
-    <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
-    <script>
-     
-      
-      
+            
       function generateUID() {
         // I generate the UID from two parts here 
         // to ensure the random number provide enough bits.
@@ -94,6 +88,8 @@
       <h2>UPLOAD FILES</h2>
       <input type='file' id="file-upload"/>
     </div>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
     <script>
        document.getElementById("file-upload").addEventListener("change", function(e){
         var file = e.target.files[0];
