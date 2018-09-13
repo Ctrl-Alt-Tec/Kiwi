@@ -1,6 +1,8 @@
 <html>
   <head>
     <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
     <script>
       // Initialize Firebase
       var config = {
@@ -97,8 +99,6 @@
       <input type='file' id="file-upload"/>
     </div>
     <div id="firebaseui-auth-container"></div>
-    <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
     <script>
        document.getElementById("file-upload").addEventListener("change", function(e){
         var file = e.target.files[0];
