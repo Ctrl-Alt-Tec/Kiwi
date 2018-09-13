@@ -27,7 +27,7 @@
       
       
       var ui = new firebaseui.auth.AuthUI(firebase.auth());
-      ui.start('.section-fullscreen', {
+      ui.start('#upload-main', {
         callbacks: signInSuccessWithAuthResult: function(authResult, redirectUrl) {
         document.querySelector(".section-fullscreen").innerHTML = "<h2>UPLOAD FILES</h2><input type='file' id='file-upload'/>"
       },
