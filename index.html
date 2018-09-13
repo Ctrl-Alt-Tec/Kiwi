@@ -29,7 +29,11 @@
       var ui = new firebaseui.auth.AuthUI(firebase.auth());
       ui.start('#firebaseui-auth-container', {
         callbacks: {signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-        document.querySelector(".section-fullscreen").innerHTML = "<h2>UPLOAD FILES</h2><input type='file' id='file-upload'/>"
+        document.querySelector(".section-fullscreen").innerHTML = 
+          "<h3>Hola, "+firebase.auth().currentUser+"</h3>"+
+          "<a onClick='firebase.auth().signOut()'>CERRAR SESIÓN</a>"+
+          "<h2>UPLOAD FILES</h2>"+
+          "<input type='file' id='file-upload'/>"
       }},
         signInOptions: [
           firebase.auth.EmailAuthProvider.PROVIDER_ID
@@ -38,7 +42,6 @@
       });
       
       var fileUID = generateUID();
-      
       
       
     </script>
