@@ -1,6 +1,5 @@
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
@@ -109,6 +108,14 @@
       .sign-out{
         padding: 24px
       }
+      footer{
+        background-color: rgba(255,255,255,0.5);
+        padding: 26px 0px;
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: space-between;
+        align-items: center;
+      }
     </style>
   </head>
   <body>
@@ -120,8 +127,12 @@
       <a href='' onClick="firebase.auth().signOut()" class='login-username'>INICIAR SESIÓN</a>
     </div>
     <div class='section-fullscreen' id='upload-main'>
-      
     </div>
     <div id="firebaseui-auth-container"></div>
+    <footer>
+      <div>
+       <img class = "logo" src="HechoConAmor.png">
+      </div>
+    </footer>
   </body>
 </html>
