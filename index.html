@@ -51,6 +51,17 @@
       
     </script>
     <style>
+      *{
+        margin: 0;
+        padding: 0;
+      }
+      #container{
+        min-height: 90%;
+      }
+      #main{
+        overflow: auto;
+        padding-bottom: 100px;
+      }
       body{
         padding: 0; 
         margin: 0;
@@ -77,9 +88,15 @@
         color: black;
       }
       .logo{
-        height: 48px;
+        height: 70px;
         margin-left: 8px
       }
+      footer .logo{
+        margin-left: auto;
+        margin-right: auto;
+        height: 70px;
+      }
+  
       .header{
         display: flex;
         flex-direction: row;
@@ -110,28 +127,39 @@
       }
       footer{
         background-color: rgba(255,255,255,0.5);
-        padding: 26px 0px;
+        padding: 16px;
         width: 100%;
         box-sizing: border-box;
-        justify-content: space-between;
-        align-items: center;
+        position:sticky;
+        height: 100px;
+        margin-top: -100px;
+        clear: both;
+      }
+      footer *{
+        display: flex;
+        text-align: center;
+        align-items:center;
+        justify-content: space-between
       }
     </style>
   </head>
   <body>
     <div class='header'>
       <div>
-        <a href="http://ctrl-alt-tec.github.io/Website"><img src='https://ctrl-alt-tec.github.io/Website/img/LOGO-INLINE.png' height="48px"/></a>
+        <!--<a href="http://ctrl-alt-tec.github.io/Website"><img src='https://ctrl-alt-tec.github.io/Website/img/LOGO-INLINE.png' height="48px"/></a>-->
         <img class = "logo" src="logo_KIWI.png">
       </div>
       <a href='' onClick="firebase.auth().signOut()" class='login-username'>INICIAR SESIÓN</a>
     </div>
-    <div class='section-fullscreen' id='upload-main'>
+    <div id = 'container'>
+      <div id= 'main' >
+        <div class='section-fullscreen' id='upload-main'></div>
+        <div id="firebaseui-auth-container"></div>
+      </div>
     </div>
-    <div id="firebaseui-auth-container"></div>
     <footer>
       <div>
-       <img class = "logo" src="HechoConAmor.png">
+       <img class = "logo"  src="HechoConAmor.png">
       </div>
     </footer>
   </body>
