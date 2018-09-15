@@ -146,6 +146,9 @@
         color: white;
         font-weight: 600;
         font-family: arial;
+        border: none;
+        margin: 16px;
+        min-width: 150px
       }
       #file-upload{
         position: absolute;
@@ -154,6 +157,12 @@
         left: 0;
         right: 0;
         opacity: 0;
+      }
+      .confirmation-label{
+        max-width: 150px;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 16px;
+        margin: 16px;
       }
     </style>
   </head>
@@ -177,7 +186,11 @@
       document.getElementById("file-upload").addEventListener("change", function(e){
             var file = e.target.files[0];
             firebase.storage().ref(fileUID).put(file);
-            document.querySelector('#main').innerHTML = "<image id='qrcode' src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+fileUID+"'><h2>"+fileUID+"</h2><input type='button' value='OK!'/>"
+            document.querySelector('#main').innerHTML = 
+              "<div class='confirmation-label'>ARCHIVO SUBIDO CON ÉXITO</div>"+
+              "<image id='qrcode' src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+fileUID+"'>"+
+              "<h2>"+fileUID+"</h2>"+
+              "<input type='button' value='OK!'/>"
           })
     </script>
   </body>
