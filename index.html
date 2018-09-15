@@ -134,6 +134,18 @@
         align-items:center;
         justify-content: space-between
       }
+      .input-button-wrapper{
+        overflow: hidden
+      }
+      .input-button{
+        width: auto;
+        border: 1px solid #84BB22;
+        border-radius: 16px;
+        padding: 16px;
+        font-size: 16px;
+        color: #84BB22;
+        font-weight: 600
+      }
     </style>
   </head>
   <body>
@@ -144,8 +156,10 @@
       </div>
     </div>
     <div id= 'main' >
-      <h2>SELECCIONAR ARCHIVO</h2> 
-      <input type='file' id='file-upload'/>
+      <div class='input-button-wrapper'>
+        <input type='file' id='file-upload'/>
+        <div class="input-button">SELECCIONAR ARCHIVO</div>
+      </div>
     </div>
     <footer>
        <img src="HechoConAmor.png" height="40px">
