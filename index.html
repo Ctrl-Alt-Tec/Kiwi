@@ -50,9 +50,7 @@
         margin: 0;
         padding: 0;
       }
-      #container{
-        min-height: 88%;
-      }
+
       #main{
         overflow: auto;
         padding-bottom: 100px;
@@ -67,7 +65,9 @@
       body{
         padding: 0; 
         margin: 0;
-        background-color: rgba(160,160,160,0.2)
+        background-color: rgba(160,160,160,0.2);
+        display: flex;
+        flex-direction: column
       }
       h1{
         font-family: 'Arial';
@@ -140,11 +140,9 @@
         <img class="logo" src="logo_KIWI.png">
       </div>
     </div>
-    <div id = 'container'>
-      <div id= 'main' >
-        <h2>SELECCIONAR ARCHIVO</h2> 
-        <input type='file' id='file-upload'/>
-      </div>
+    <div id= 'main' >
+      <h2>SELECCIONAR ARCHIVO</h2> 
+      <input type='file' id='file-upload'/>
     </div>
     <footer>
        <img src="HechoConAmor.png" height="40px">
