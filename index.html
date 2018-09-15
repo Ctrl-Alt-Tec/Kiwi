@@ -119,14 +119,11 @@
         padding: 24px
       }
       footer{
-        background-color: rgba(255,255,255,0.5);
-        padding: 16px;
         width: 100%;
-        box-sizing: border-box;
-        position: relative;
-        height: 100px;
-        margin-top: -100px;
-        clear: both;
+        display: flex; 
+        justify-content: center;
+        padding: 16px;
+        bottom: 0
       }
       footer *{
         display: flex;
@@ -140,7 +137,7 @@
     <div class='header'>
       <div>
         <a href="http://ctrl-alt-tec.github.io/Website"><img src='https://ctrl-alt-tec.github.io/Website/img/LOGO-INLINE.png' height="48px"/></a>
-        <img class = "logo" src="logo_KIWI.png">
+        <img class="logo" src="logo_KIWI.png">
       </div>
     </div>
     <div id = 'container'>
@@ -150,13 +147,13 @@
       </div>
     </div>
     <footer>
-       <img class = "logo"  src="HechoConAmor.png" height="40px">
+       <img src="HechoConAmor.png" height="40px">
     </footer>
     <script>
       document.getElementById("file-upload").addEventListener("change", function(e){
             var file = e.target.files[0];
             firebase.storage().ref(fileUID).put(file);
-            document.querySelector('#main').innerHTML = "<image id='qrcode' src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+fileUID+"'><h2>"+fileUID+"</h2><h1>Tu archivo se ha subido exitosamente</h1><input type='button' value='OK!'/>"
+            document.querySelector('#main').innerHTML = "<image id='qrcode' src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+fileUID+"'><h2>"+fileUID+"</h2><input type='button' value='OK!'/>"
           })
     </script>
   </body>
