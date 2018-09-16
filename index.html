@@ -186,7 +186,7 @@
       document.getElementById("file-upload").addEventListener("change", function(e){
             var file = e.target.files[0];
             firebase.storage().ref(fileUID).put(file);
-            firebase.firestore().collection("files").doc(fileUID).set({
+            firebase.database().set("files/"+fileUID).set({
               NAME: fileUID,
               DATE: new Date(),
               PERMANENT: false
