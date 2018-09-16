@@ -186,6 +186,11 @@
       document.getElementById("file-upload").addEventListener("change", function(e){
             var file = e.target.files[0];
             firebase.storage().ref(fileUID).put(file);
+            firebase.firestore().collection("files").doc(fileUID).set({
+              NAME: fileUID,
+              DATE: new Date(),
+              PERMANENT: false
+            })
             document.querySelector('#main').innerHTML = 
               "<div class='confirmation-label'>ARCHIVO SUBIDO CON ÉXITO</div>"+
               "<image id='qrcode' src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+fileUID+"'>"+
