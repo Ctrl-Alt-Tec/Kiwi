@@ -26,23 +26,6 @@
       }
       
       
-      /*var ui = new firebaseui.auth.AuthUI(firebase.auth());
-      ui.start('#firebaseui-auth-container', {
-        callbacks: {signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-          document.querySelector(".login-username").innerText = firebase.auth().currentUser.displayName;
-          document.querySelector("#upload-main").innerHTML = 
-            "<input type='file' id='file-upload'/>"
-         
-      }},
-        signInOptions: [
-          firebase.auth.EmailAuthProvider.PROVIDER_ID
-        ],
-        credentialHelper: firebaseui.auth.CredentialHelper.NONE,
-        // Other config options...
-      });*/
-      
-      var fileUID = generateUID();
-      
       
     </script>
     <style>
@@ -180,11 +163,12 @@
       </div>
     </div>
     <footer>
-       <img src="HechoConAmor.png" height="40px">
+       <img src="HechoConAmor.png" height="80px">
     </footer>
     <script>
       document.getElementById("file-upload").addEventListener("change", function(e){
             var file = e.target.files[0];
+            var fileUID = generateUID();
             firebase.storage().ref(fileUID).put(file);
             firebase.database().ref("files/"+fileUID).set({
               NAME: fileUID,
