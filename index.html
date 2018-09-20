@@ -1,8 +1,8 @@
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
-    <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+    <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
     <script>
       // Initialize Firebase
       var config = {
@@ -26,32 +26,32 @@
       }
       
       
-      var ui = new firebaseui.auth.AuthUI(firebase.auth());
-      ui.start('#firebaseui-auth-container', {
-        signInOptions: [
-          firebase.auth.EmailAuthProvider.PROVIDER_ID
-        ],
-        // Other config options...
-      });
-      
-      var fileUID = generateUID();
-      
-      
       
     </script>
     <style>
-      body{
-        padding: 0; 
+      *{
         margin: 0;
+        padding: 0;
       }
-      .section-fullscreen{
-        padding: 24px;
+
+      #main{
+        overflow: auto;
+        padding-bottom: 100px;
+        padding-top: 24px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         align-content: center;
         flex-grow: 1;
+        padding: 16px
+      }
+      body{
+        padding: 0; 
+        margin: 0;
+        background-color: rgba(160,160,160,0.2);
+        display: flex;
+        flex-direction: column
       }
       h1{
         font-family: 'Arial';
@@ -59,12 +59,21 @@
         font-size: 24px;
       }
       h2{ 
-        font-family:  Arial;
+        font-family: 'Share Tech Mono', monospace;
+        text-transform: uppercase;
         font-weight: 900;
-        font-size: 39px;
+        font-size: 48px;
         color: black;
-        line-height: 0;
       }
+      .logo{
+        height: 70px;
+      }
+      footer .logo{
+        margin-left: auto;
+        margin-right: auto;
+        height: 70px;
+      }
+  
       .header{
         display: flex;
         flex-direction: row;
@@ -79,35 +88,99 @@
         font-size: 16;
         top: 0; 
         box-sizing: border-box;
+        justify-content: space-between;
       }
       .header *{
         display: flex;
         text-align: center;
+        align-items: center;
+        justify-content: space-between
       }
-      .header * :hover{
+      /*.header * :hover{
         background-color: rgba(160,160,160,0.5)
+      }*/
+      .sign-out{
+        padding: 24px
+      }
+      footer{
+        width: 100%;
+        display: flex; 
+        justify-content: center;
+        padding: 16px;
+        bottom: 0;
+        box-sizing: border-box
+      }
+      footer *{
+        display: flex;
+        text-align: center;
+        align-items:center;
+        justify-content: space-between
+      }
+      .input-button-wrapper{
+        overflow: hidden; 
+        position: relative
+      }
+      .input-button{
+        width: auto;
+        background-color: #84BB22;
+        border-radius: 16px;
+        padding: 16px;
+        font-size: 16px;
+        color: white;
+        font-weight: 600;
+        font-family: arial;
+        border: none;
+        margin: 16px;
+        min-width: 150px
+      }
+      #file-upload{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 0;
+      }
+      .confirmation-label{
+        max-width: 150px;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 16px;
+        margin: 16px;
       }
     </style>
   </head>
   <body>
     <div class='header'>
-      <a href="http://ctrl-alt-tec.github.io/Website"><img src='https://ctrl-alt-tec.github.io/Website/img/LOGO-INLINE.png' height="48px"/></a>
-      <h1>/PROJECT KIWI</h1>
+      <div style="flex-wrap: wrap">
+        <a href="http://ctrl-alt-tec.github.io/Website" style="margin-right: 8px"><img src='https://ctrl-alt-tec.github.io/Website/img/LOGO-INLINE.png' height="48px"/></a>
+        <img class="logo" src="logo_KIWI.png">
+      </div>
     </div>
-    <div class='section-fullscreen' id='upload-main'>
-      <h2>UPLOAD FILES</h2>
-      <input type='file' id="file-upload"/>
+    <div id= 'main' >
+      <div class='input-button-wrapper'>
+        <input type='file' id='file-upload'/>
+        <div class="input-button">SELECCIONAR ARCHIVO</div>
+      </div>
     </div>
-    <div id="firebaseui-auth-container"></div>
+    <footer>
+       <img src="HechoConAmor.png" height="80px">
+    </footer>
     <script>
-       document.getElementById("file-upload").addEventListener("change", function(e){
-        var file = e.target.files[0];
-        firebase.storage().ref(fileUID).put(file);
-        
-        document.querySelector('#upload-main').innerHTML = "<image id='qrcode' src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+fileUID+"'><h2>"+fileUID+"</h2><h1>Tu archivo se ha subido exitosamente</h1><input type='button' value='OK!'/>"
-         //alert(fileUID);
-      })
-     
+      document.getElementById("file-upload").addEventListener("change", function(e){
+            var file = e.target.files[0];
+            var fileUID = generateUID();
+            firebase.storage().ref(fileUID).put(file);
+            firebase.database().ref("files/"+fileUID).set({
+              NAME: fileUID,
+              DATE: new Date(),
+              PERMANENT: false
+            })
+            document.querySelector('#main').innerHTML = 
+              "<div class='confirmation-label'>ARCHIVO SUBIDO CON ÉXITO</div>"+
+              "<image id='qrcode' src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+fileUID+"'>"+
+              "<h2>"+fileUID+"</h2>"+
+              "<input type='button' value='OK!' class='input-button' onClick='window.location.reload(true)'/>"
+          })
     </script>
   </body>
 </html>
