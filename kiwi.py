@@ -1,3 +1,5 @@
+  GNU nano 2.7.4                                                                                           Fichero: kiwi.py                                                                                                       
+
 #!/usr/bin/python
 import pyrebase
 import subprocess
@@ -14,25 +16,32 @@ config = {
 }
 
 firebase = pyrebase.initialize_app(config)
-schedule.every().day.at("23:45").do(deleteFilesDaily)
-def main():
+#schedule.every().day.at("23:45").do(deleteFilesDaily)
+def main():     
         ## GET ID
-        docID = raw_input("ID: ");
+        print("BIENVENIDO A KIWI...")
+        print("POR CTRL-ALT-TEC")
+        print("")
+        docID = raw_input("INGRESE EL ID: ");
         docURL = firebase.storage().child(docID).get_url(1)
-        firebase.storage().child(docID).download(docID)
+        #firebase.storage().child(docID).download(docID)
 
         ## PRINT
-        subprocess.call(["lp", docID])
+        #subprocess.call(["lp", docID])
+        #print("Printing...")
 
-
-
+        ## DELETE
+        #subprocess.call(["sudo rm", "-rf", docID])
 
 def deleteFilesDaily():
-        print "Deleting..."
+        print( "Deleting..." )
         all_files = firebase.database().child("files").get()
         for file in all_files.each():
                 firebase.storage().child(file.key()).delete(file.key())
                 firebase.database().child("files/"+file.key()).remove()
+
+schedule.every().day.at("23:45").do(deleteFilesDaily)
+
 
 while True:
         #main()
