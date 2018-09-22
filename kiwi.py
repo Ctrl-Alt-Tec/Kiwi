@@ -1,6 +1,3 @@
-  GNU nano 2.7.4                                                                                           Fichero: kiwi.py                                                                                                       
-
-#!/usr/bin/python
 import pyrebase
 import subprocess
 import schedule
@@ -22,7 +19,7 @@ def main():
         print("BIENVENIDO A KIWI...")
         print("POR CTRL-ALT-TEC")
         print("")
-        docID = raw_input("INGRESE EL ID: ");
+        docID = raw_input("INGRESE EL ID: ")
         docURL = firebase.storage().child(docID).get_url(1)
         #firebase.storage().child(docID).download(docID)
 
