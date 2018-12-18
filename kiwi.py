@@ -5,6 +5,34 @@
 # EDVILME 2018
 # DEVELOPED FOR CTRL+ALT+TEC
 
+## ASSEMBLING INSTRUCTIONS
+## ASSEMBLING INSTRUCTIONS - CONNECTIONS [DEVICE:PI]
+
+### KEYPAD
+#### 1:7
+#### 2:11
+#### 3:13
+#### 4:15
+#### 5:31
+#### 6:33
+#### 7:35
+#### 8:37
+
+### LCD SCREEN
+#### k:GND
+#### A:5V
+#### D7:8
+#### D6:7
+#### D5:12
+#### D4:16
+#### E:20
+#### RW:GND
+#### RS:21
+#### V0:GND
+#### VSS:GND
+#### VDD:5V
+
+
 ## import libraries
 import pyrebase
 import subprocess
