@@ -16,11 +16,9 @@
         messagingSenderId: "613390401674"
       };
       firebase.initializeApp(config);
-      var urlParams = [];
+      var urlParams = new Map();
       window.location.search.substring(1).split("&").forEach(function(item){
-        var itemArray = new Map()
-        itemArray.set(item.split("=")[0], item.split("=")[1])
-        urlParams.push(itemArray)
+        urlParams.set(item.split("=")[0], item.split("=")[1])
       })
       console.log(urlParams)
      </script>
