@@ -1,3 +1,5 @@
+<img src="logo-name.png"/>
+
 # Kiwi
 Porject Kiwi is a printing vending machine that allows printing of files through the internet using an hexadecimal code and a reaspberry PI. Programmed entirely on Python and Javascript
 
@@ -9,3 +11,5 @@ Porject Kiwi is a printing vending machine that allows printing of files through
 - Javascript
 - Firebase
 - Pyrebase
+- Zbar
+- Chromium project
