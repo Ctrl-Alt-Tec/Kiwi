@@ -31,8 +31,7 @@
           USER: urlParams.get('USER')+'@itesm.mx',
           TYPE: 'PAYMENT'
         }).then(function(){
-          //document.querySelector("#return").innerHTML = ""
-          return "SUCCESS!"
+          document.querySelector("#return").innerHTML = "Succesfully charged $"+parseInt(urlParams.get('PAGES'))*1.5+" to "+  urlParams.get('USER')+'@itesm.mx' + " for using kiwi."
         })
       }
       console.log(urlParams)
