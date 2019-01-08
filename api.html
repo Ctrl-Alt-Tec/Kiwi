@@ -16,7 +16,8 @@
         messagingSenderId: "613390401674"
       };
       firebase.initializeApp(config);
-      console.log(window.location.search.substring(1))
+      var urlParams = window.location.search.substring(1).split("&")
+      console.log(urlParams)
      </script>
   </body>
 </html>
