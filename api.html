@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>CTRL+ALT+TEC KIWI API (v.1.2)</title>
+    <title>CTRL+ALT+TEC KIWI API (v.1.3)</title>
     <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
   </head>
   <body>
@@ -21,7 +21,7 @@
       window.location.search.substring(1).split("&").forEach(function(item){
         urlParams.set(item.split("=")[0], item.split("=")[1])
       })
-      if(urlParams.get("KEY")=="iruKHi4qAih4kg0fvDHbMNfvPBa2"){
+      if(urlParams.get("KEY")=="iruKHi4qAih4kg0fvDHbMNfvPBa2" && Math.floor(Date.now() / 1000) - parseInt(urlParams.get('TIMESTAMP')) < 20){
         firebase.firestore().collection("bankTransfers").doc().set({
           TARGET: 'kiwi@ctrl-alt-tec.hackclub.com',
           CONCEPT: 'kiwi print',
@@ -33,9 +33,8 @@
         }).then(function(){
           document.querySelector("#return").innerHTML = "Succesfully charged $"+parseInt(urlParams.get('PAGES'))*1.5+" to "+  urlParams.get('USER')+'@itesm.mx' + " for using kiwi."
         })
-      }
-      if( Math.floor(Date.now() / 1000) - parseInt(urlParams.get('TIMESTAMP')) < 20){
-        alert('CURRENT!')
+      }else{
+        alert('SECURITY WARNING!\n The key provided is not valid or the link has expired')
       }
       console.log(urlParams)
       console.log(urlParams.get('USER'))  
