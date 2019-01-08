@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>CTRL+ALT+TEC KIWI API (v.1.0)</title>
+    <title>CTRL+ALT+TEC KIWI API (v.1.2)</title>
     <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
   </head>
   <body>
@@ -33,6 +33,9 @@
         }).then(function(){
           document.querySelector("#return").innerHTML = "Succesfully charged $"+parseInt(urlParams.get('PAGES'))*1.5+" to "+  urlParams.get('USER')+'@itesm.mx' + " for using kiwi."
         })
+      }
+      if( Math.floor(Date.now() / 1000) - parseInt(urlParams.get('TIMESTAMP')) < 20){
+        alert('CURRENT!')
       }
       console.log(urlParams)
       console.log(urlParams.get('USER'))  
