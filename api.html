@@ -6,6 +6,7 @@
   <body>
     <h1>KIWI</h1>
     <h2>REST API</h2>
+    <div id="return"></div>
     <script>
         // Initialize Firebase
       var config = {
@@ -31,7 +32,7 @@
           USER: urlParams.get('USER')+'@itesm.mx',
           TYPE: 'PAYMENT'
         }).then(function(){
-          document.querySelector("#return").innerHTML = "Succesfully charged $"+parseInt(urlParams.get('PAGES'))*1.5+" to "+  urlParams.get('USER')+'@itesm.mx' + " for using kiwi."
+          document.querySelector("#return").innerText = "Succesfully charged $"+parseInt(urlParams.get('PAGES'))*1.5+" to "+  urlParams.get('USER')+'@itesm.mx' + " for using kiwi."
         })
       }else{
         alert('SECURITY WARNING!\n The key provided is not valid or the link has expired')
