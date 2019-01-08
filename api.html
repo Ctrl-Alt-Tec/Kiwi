@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>CTRL+ALT+TEC KIWI API (v.0.0.5)</title>
+    <title>CTRL+ALT+TEC KIWI API (v.0.1)</title>
     <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
   </head>
   <body>
@@ -21,7 +21,17 @@
         urlParams.set(item.split("=")[0], item.split("=")[1])
       })
       if(urlParams.get("KEY")=="iruKHi4qAih4kg0fvDHbMNfvPBa2"){
-        alert("Auth!")
+        firebase.firestore().collection("bankTransfers").doc().set({
+          TARGET: 'kiwi@ctrl-alt-tec.hackclub.com',
+          CONCEPT: 'kiwi print',
+          QUANTITY: parseInt(urlParams.get('PAGES'))*1.5,
+          DATE: new Date(),
+          FINISHED: false,
+          USER: urlParams.get('USER')+'@itesm.mx',
+          TYPE: 'PAYMENT'
+        }).then(function(){
+          alert('done')
+        })
       }
       console.log(urlParams)
       console.log(urlParams.get('USER'))  
