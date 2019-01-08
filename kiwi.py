@@ -1,6 +1,6 @@
 
 # KIWI.PY
-# VERSION 1.1 BETA
+# VERSION 1.2 BETA
 
 # KIWI PROJECT
 # EDVILME 2018
@@ -45,7 +45,8 @@ import os
 import signal
 import sys
 from threading import Thread
-
+import webbrowser
+import datetime
 
 ## CONFIG
 ## config - pyrebase
@@ -203,11 +204,14 @@ def main():
 		print docID
 		print len(docID)
 		firebase.storage().child(docID).download(docID)
+		pagesCount=12
 		subprocess.call(["lp", docID])
 		lcd.clear()
 		lcd.message("Imprimiendo...")
 		time.sleep(10)
 		os.remove( docID)
+		##	!ADD TO RASPBERRY PI
+		webbrowser.open("https://ctrl-alt-tec.github.io/Kiwi/api.html?USER="+userID+"&PAGES="+pagesCount+"&KEY=iruKHi4qAih4kg0fvDHbMNfvPBa2&TIMESTAMP="+time.mktime(datetime.datetime.now().timetuple()))
 	except Exception as e:
 		lcd.clear()
 		lcd.message("Perdoname pero no\nOcurrio un error")
