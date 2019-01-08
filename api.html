@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>CTRL+ALT+TEC KIWI API (v.0.0.2)</title>
+    <title>CTRL+ALT+TEC KIWI API (v.0.0.3)</title>
     <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
   </head>
   <body>
@@ -18,7 +18,8 @@
       firebase.initializeApp(config);
       var urlParams = [];
       window.location.search.substring(1).split("&").forEach(function(item){
-        var itemArray = item.split("=")
+        var itemArray = new Map()
+        itemArray.set(item.split("=")[0], item.split("=")[1])
         urlParams.push(itemArray)
       })
       console.log(urlParams)
