@@ -1,5 +1,6 @@
+
 # KIWI.PY
-# VERSION 0.9 BETA
+# VERSION 1.1 BETA
 
 # KIWI PROJECT
 # EDVILME 2018
@@ -40,18 +41,23 @@ import schedule
 import time
 import Adafruit_CharLCD as LCD
 import RPi.GPIO as GPIO
+import os
+import signal
+import sys
+from threading import Thread
 
 
-## config
+## CONFIG
 ## config - pyrebase
-config={
-	"apiKey": "AIzaSyCTC5VTiUENrzDSVstB5ex98BxCDP9tMB4",
-	"authDomain": "kiwi-d38bd.firebaseapp.com",
-	"databaseURL": "https://kiwi-d38bd.firebaseio.com",
-	"storageBucket": "kiwi-d38bd.appspot.com",
-	"serviceAccount": "serviceAccountKey.json"
+config = {
+  "apiKey": "AIzaSyCTC5VTiUENrzDSVstB5ex98BxCDP9tMB4",
+  "authDomain": "kiwi-d38bd.firebaseapp.com",
+  "databaseURL": "https://kiwi-d38bd.firebaseio.com",
+  "storageBucket": "kiwi-d38bd.appspot.com",
+  "serviceAccount": "serviceAccountKey.json"
 }
-firebase = pyrebase_initialize_app(config)
+
+firebase = pyrebase.initialize_app(config)
 
 ## config - lcd screen
 lcd_rs = 21
@@ -67,44 +73,107 @@ lcd_rows = 2
 lcd = LCD.Adafruit_CharLCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7, lcd_columns, lcd_rows, lcd_backlight)
 
 ## config - keypad
-GPIO.setmode(GPIO.board)
+#GPIO.setmode(GPIO.BOARD)
 keypad_keys = [
 	["1", "2", "3", "A"],
 	["4", "5", "6", "B"],
 	["7", "8", "9", "C"],
 	["*", "0", "#", "D"]
 ]
-keyboard_col_pins = [15, 13, 11, 7]
-keyboard_row_pins = [37, 35, 33, 31]
+#keyboard_col_pins = [15, 13, 11, 7] FOR MODE GPIO.BOARD
+keyboard_col_pins = [22, 27, 17, 4]
+#keyboard_row_pins = [37, 35, 33, 31] FOR MODE GPIO.BOARD
+keyboard_row_pins = [26, 19, 13, 6]
 
-for i in range(4):
-	GPIO.setup(keyboard_col_pins[i], GPIO.OUT)
-	GPIO.output(keyboard_col_pins[i], 1)
-	
-	GPIO.setup(keyboard_row_pins[i], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+for j in range(4):
+	GPIO.setup(keyboard_col_pins[j], GPIO.OUT)
+	GPIO.output(keyboard_col_pins[j], 1)
+for i in range(4):	
+	GPIO.setup(keyboard_row_pins[i], GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
 
-## methods
-## methods - keypad
-############################################## check
+
+## METHODS (INPUT)
+## methods - keypad input (DEPRECATED IN V.0.9)
 def keypadInput():
 	try:
+		isTyping=True
 		keyboardReturn = ""
-		while(True):
+		while(isTyping):
 			for j in range(4):
 				GPIO.output(keyboard_col_pins[j],0)
 				for i in range(4):
 					if GPIO.input(keyboard_row_pins[i]) == 0:
 						if keypad_keys[i][j] == "#":
+							isTyping = False
 							break
+						elif keypad_keys[i][j] == "*":
+							keyboardReturn = keyboardReturn[:-1]
 						else:
-							keyboardReturn = keyboardReturn.concat( keypad_keys[i][j] )
-						while(GPIO.input(keyboard_row_pins[i)==0):
+							keyboardReturn = keyboardReturn + keypad_keys[i][j] 
+						
+						lcd.clear()
+						lcd.message(keyboardReturn)
+						while(GPIO.input(keyboard_row_pins[i])==0):
 							pass
 				GPIO.output(keyboard_col_pins[j],1)
 		return keyboardReturn
 	except KeyboardInterrupt:
 		GPIO.cleanup()
+
+## methods - camera input
+def qrInput():
+	qrReturn=None
+	while p.poll() is None:
+		qrReturn = p.stdout.readline()
+		break
+	lcd.clear()
+	lcd.message(qrReturn)
+	return qrReturn[:-1]
+
+
+
+## methods - camera and keypad input
+def multiInput():
+	isRecording=True
+	inputReturn=''
+	try:
+		while(isRecording):
+			for j in range(4):
+				GPIO.output(keyboard_col_pins[j], 0)
+				for i in range(4):
+					if returnedQR != '':
+						inputReturn = returnedQR
+						isRecording=False
+						lcd.clear()
+						lcd.message(inputReturn)
+						time.sleep(3)
+						break
+					elif GPIO.input(keyboard_row_pins[i]) == 0:
+						if keypad_keys[i][j]=='#':
+							isRecording=False
+							break
+						elif keypad_keys[i][j]=='*':
+							inputReturn=inputReturn[:-1]
+						else:
+							inputReturn=inputReturn+keypad_keys[i][j]
+						lcd.clear()
+						lcd.message(inputReturn)
+						while(GPIO.input(keyboard_row_pins[i])==0):
+							pass
+				GPIO.output(keyboard_col_pins[j],1)
+		return inputReturn
+	except KeyboardInterrupt:
+		GPIO.cleanup()
+
+
+returnedQR=''
+def liveQR():
+	global returnedQR
+	p = subprocess.Popen('/usr/bin/zbarcam --raw --prescale=200x200',shell=True, stdout=subprocess.PIPE)
+	while p.poll() is None:
+		returnedQR = p.stdout.readline()[:-1]
+		break
 
 
 def chronDeleteFiles():
@@ -115,24 +184,40 @@ def chronDeleteFiles():
 		firebase.database().child("files/"+file.key()).remove()
 
 def main():
+	liveQRthread = Thread(target=liveQR)
+	liveQRthread.start()
+	userID = 'a01023646@itesm.mx'
 	lcd.clear()
-	lcd.message("KIWI \n")
-	lcd.message("By CTRL+ALT+TEC \n")
-
-	lcd.message("Ingrese el ID")
+	lcd.message("CTRL+ALT+TEC\n")
+	lcd.message("KIWI")
+	time.sleep(2)
+	lcd.clear()
+	lcd.message("ID O CODIGO QR")
 	#docID = raw_input("Ingrese el ID: ")
-	docID = keyboardInput()
+	#try:
+	docID = multiInput()
+	lcd.clear()
+	lcd.message("Bajando...")
+	#time.sleep(5)
 	try:
+		print docID
+		print len(docID)
 		firebase.storage().child(docID).download(docID)
-
-		subprodess.call(["lp", docID])
-		lcd.message("Printing...")
-
-		subprocess.call(["sudo rm", "-rf", docID])
-	catch:
-		lcd.message("Perdoname pero no \n")
-		lcd.message("Ocurrio un error")
-
+		subprocess.call(["lp", docID])
+		lcd.clear()
+		lcd.message("Imprimiendo...")
+		time.sleep(10)
+		os.remove( docID)
+	except Exception as e:
+		lcd.clear()
+		lcd.message("Perdoname pero no\nOcurrio un error")
+		time.sleep(2)
+		lcd.clear()
+		lcd.message("Reiniciando...")
+		time.sleep(1)
+		print(str(e))
+	lcd.clear()
+	lcd.message("Gracias por usar Kiwi")
 
 schedule.every().day.at("23:45").do(chronDeleteFiles)
 
@@ -141,3 +226,4 @@ while(True):
 	time.sleep(1)
 	main()
 
+## -- END OF CODE (223 LINES) -- JAN 7 2019
