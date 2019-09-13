@@ -13,3 +13,7 @@ Porject Kiwi is a printing vending machine that allows printing of files through
 - Pyrebase
 - Zbar
 - Chromium project
+
+## TEAM
+Built with love by Ctrl Alt Tec. 
+Special thanks to: Eduardo Villalpando, Ricardo Skewes, Juan Carlos Garfias, Rafael Padilla and Lourdes Badillo. 
